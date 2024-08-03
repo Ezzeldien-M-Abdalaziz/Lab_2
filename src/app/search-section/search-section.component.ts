@@ -1,4 +1,4 @@
-import { Component ,EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output,Input} from '@angular/core';
 @Component({
   selector: 'app-search-section',
   standalone: true,
@@ -7,10 +7,24 @@ import { Component ,EventEmitter, Output } from '@angular/core';
   styleUrl: './search-section.component.css'
 })
 export class SearchSectionComponent {
-  //mom
-  @Output() searchEmitter: EventEmitter<string> = new EventEmitter<string>();
+  // searchInput : string = '';
+  //get users from parent
+  @Input() usersFromParent:Array<any> = []
+  //send search output to parent
+  @Output() searchedUser : EventEmitter<string> = new EventEmitter<string>();
 
-  onSearch(searchTerm:string): void {
-    this.searchEmitter.emit(searchTerm.trim().toLowerCase());
+  searchForUser(email:string){
+    this.searchedUser.emit(email);
+    console.log(email);
+
+  }
+
+  clearSearch() {
+    // Clear the search input field
+    const searchInput = document.getElementById('search') as HTMLInputElement;
+    if (searchInput) {
+      searchInput.value = '';
+      this.searchedUser.emit('');
+    }
   }
 }

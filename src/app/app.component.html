@@ -1,2 +1,2 @@
-<app-search-section (searchEmitter)="onSearch($event)"></app-search-section>
-<app-users-section [searchTerm]="searchTerm"></app-users-section>
+<app-search-section [usersFromParent] = "users" (searchedUser)="GetemailfromChild($event)"></app-search-section>
+<app-users-section [usersFromParent] = "users" [emailFromParent]="email" ></app-users-section>
